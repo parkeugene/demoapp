@@ -5,10 +5,15 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     assert true
   end
 
-  test "can create an article" do
+  test "all input fields in the form have a name" do
     get "/articles/new"
     assert_response :success
+    assert_select "form input" do
+     assert_select "[name=?]", /.+/  # Not empty
+    end
+  end
 
+  test "can create an article" do
     post "/articles", article: { title: "can create", body: "article successfully." }
     assert_response :redirect
     follow_redirect!
