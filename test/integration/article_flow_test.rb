@@ -9,8 +9,7 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     get "/articles/new"
     assert_response :success
 
-    post "/articles",
-      params: { article: { title: "can create", body: "article successfully." } }
+    post "/articles", article: { title: "can create", body: "article successfully." }
     assert_response :redirect
     follow_redirect!
     assert_response :success
