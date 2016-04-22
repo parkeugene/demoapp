@@ -5,6 +5,12 @@ class ArticlesControllerTest < ActionController::TestCase
     @article = articles(:one)
   end
 
+  # called after every single test
+  teardown do
+    # when controller is using cache it may be a good idea to reset it afterwards
+    Rails.cache.clear
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -18,10 +24,10 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should create article" do
     assert_difference('Article.count') do
-      post :create, article: {  }
+      post '/article', params: { article: { title: 'Some title' } }
     end
 
-    assert_redirected_to article_path(assigns(:article))
+    assert_redirected_to article_path(Article.last)
   end
 
   test "should show article" do
@@ -35,13 +41,20 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should update article" do
-    patch :update, id: @article, article: {  }
-    assert_redirected_to article_path(assigns(:article))
+    article = articles(:one)
+
+    patch '/article', params: { id: article.id, article: { title: "updated" } }
+
+    assert_redirected_to article_path(article)
+    # Reload association to fetch updated data and assert that title is updated.
+    article.reload
+    assert_equal "updated", article.title
   end
 
   test "should destroy article" do
+    article = articles(:one)
     assert_difference('Article.count', -1) do
-      delete :destroy, id: @article
+      delete article_url(article)
     end
 
     assert_redirected_to articles_path
