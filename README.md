@@ -1,2 +1,3 @@
 [![Stories in Ready](https://badge.waffle.io/parkeugene/demoapp.png?label=ready&title=Ready)](https://waffle.io/parkeugene/demoapp)
+[![Build Status](https://api.travis-ci.org/parkeugene/demoapp.svg?branch=master)](https://api.travis-ci.org/parkeugene/demoapp)
 # demoapp
