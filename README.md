@@ -5,10 +5,13 @@
 2016년 4월 24일 RORLAB 오프라인 모임에서 발표한 '팀 개발을 위한 GitHub 사용법'의 예제 애플리케이션입니다.
 
 [Slide]
+
 [Video]
+
 [Demo](http://teamplay.herokuapp.com/articles)
 
 * Ruby version
+
   2.2.3 이상
 
 * Database creation
